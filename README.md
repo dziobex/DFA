@@ -2,7 +2,7 @@
 Projekt zrobiony w ramach pracy domowej ze studiów.
 
 # Preview
-![](https://github.com/dziobex/DFA/blob/main/preview.mp4)
+![](https://github.com/dziobex/DFA/blob/main/preview.gif)
 
 # Jak uruchomić?
 Działa tylko na systemach MS Windows.
