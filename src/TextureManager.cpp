@@ -19,6 +19,7 @@ TextureManager::~TextureManager() {
     delete font;
 }
 
+/* ladowanie czcionki z tablicy hex */
 void TextureManager::load_font(const void *data, std::size_t len) {
     font = new sf::Font;
 
@@ -36,6 +37,7 @@ sf::Font *TextureManager::get_font() {
     return font;
 }
 
+/* ladowanie tekstury (pliku) z tablicy hex */
 void TextureManager::load_texture(const void *data, std::size_t len) {
 
     sf::Texture *newTxtr = new sf::Texture;

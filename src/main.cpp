@@ -33,6 +33,7 @@ int main()
     texture_manager.load_texture(arrow_png, arrow_png_len); //0 - strzalka
     texture_manager.load_texture(reactions_png, reactions_png_len ); //1 - wszystkie wizualne reakcje
 
+    /* ustawienie ladnej ikony aplikacji */
     sf::Image icon;
     icon.loadFromMemory(fav_png, fav_png_len);
     window.setIcon(icon.getSize().x, icon.getSize().y,icon.getPixelsPtr());
@@ -49,6 +50,8 @@ int main()
     StageManager sm;
     sm.init(&delta_time, &texture_manager, stage_number);
     sm.setup();
+
+    /* GLOWNA PETLA GRY */
 
     while (window.isOpen())
     {

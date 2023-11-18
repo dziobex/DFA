@@ -106,17 +106,20 @@ void Input::handle_text() {
     bool is_num_0 = sf::Keyboard::isKeyPressed(sf::Keyboard::Num0) || sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0);
     bool is_num_1 = sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) || sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1);
 
+    // uzytkownik wpisal 0 (na numpadzie lub tradycyjnie)
     if (is_num_0 && text_count < 125) {
         _text += '0';
         _prompt.setPosition(_prompt.getPosition() + sf::Vector2f(_displayed_text.getCharacterSize() * 3.75/5, 0));
         ++text_count;
     }
+    // uzytkownik wpisal 1 (na numpadzie lub tradycyjnie)
     if (is_num_1 && text_count < 125) {
         _text += '1';
         _prompt.setPosition(_prompt.getPosition() + sf::Vector2f(_displayed_text.getCharacterSize() * 3.75/5, 0));
         ++text_count;
     }
 
+    // usun element z inputu
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && text_count > 0) {
         int delete_count = (_text[_text.size() - 1] == '\n' ? 2 : 1);
         _text = _text.substr(0, _text.size() - delete_count);
@@ -131,9 +134,6 @@ void Input::handle_text() {
             std::string left = _text_copy.substr(0, i);
             std::string right = _text_copy.substr(i);
             _text_copy = left + '\n' + right;
-
-            // reset prompt pos
-
         }
 
         // pozycja dla prompta
@@ -145,18 +145,22 @@ void Input::handle_text() {
         _prompt.setPosition(_based_p_pos + sf::Vector2f (_px, _py));
     }
 
+    // update wyswietlacza ile znakow ma juz input
     std::string inp_count = std::to_string(_text.size());
     _limit_text.setString(std::string (3-inp_count.size(), '0') + inp_count + "/125");
 }
 
+/* wyswietlenie elementow inputu */
 void Input::render(sf::RenderWindow &window, float dt) {
     window.draw(_field);
     window.draw(_info_text);
     window.draw(_error_text);
 
     window.draw(_displayed_text);
+
     fix_propmt(dt);
     window.draw(_prompt);
+
     window.draw(_limit_text);
 }
 
@@ -166,7 +170,6 @@ Input::~Input() {
 
 /* zmieniam tresc tekstu 'bledu' */
 void Input::handle_errors() {
-
     if (text_count == 0) {
         ready = false;
         _error_text.setString("ERROR: Ale... tu nic nie ma!");
@@ -178,6 +181,7 @@ void Input::handle_errors() {
     }
 }
 
+// zwracam czysty input bez bialych znakow
 std::string Input::get_input() {
     std::string inpt = "";
 
@@ -188,17 +192,21 @@ std::string Input::get_input() {
     return inpt;
 }
 
+/* ustawiam kolor znaku zachety */
+
 void Input::fix_propmt(float dt) {
     if (_prompt_alpha >= 255) {
+        // rozpoczynanie zaciemniania
         _prompt_fade = true;
         _prompt_alpha = 255;
     }
     if (_prompt_alpha <= 0) {
+        // rozpoczynanie rozjasniania
         _prompt_fade = false;
         _prompt_alpha = 0;
     }
 
-    _prompt_alpha += (_prompt_fade ? -1 : 1) * dt * 1000;
+    _prompt_alpha += (_prompt_fade ? -1 : 1) * dt * 1000; // <-- wsp. szybkosci rozjas/przyciem -niania znaku
 
     sf::Color _p_color = _prompt.getFillColor();
     _p_color.a = _prompt_alpha;

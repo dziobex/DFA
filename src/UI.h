@@ -9,6 +9,8 @@
 #include "Constants.h"
 #include "TextureManager.h"
 
+/* KOD UI DLA PROGRAMU */
+
 struct Button {
     sf::Text buttonText;
     sf::Color normalTextColor, hoverTextColor;

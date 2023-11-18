@@ -7,6 +7,7 @@
 
 #include "StageManager.h"
 
+/* konstruktor */
 StageManager::StageManager() {
     dt = nullptr;
     texture_manager = nullptr;
@@ -18,6 +19,7 @@ StageManager::StageManager() {
     SIM_SPEED_LOC = SIM_SPEED;
 }
 
+/* destruktor i czyszczenie pamieci */
 StageManager::~StageManager() {
     delete dt;
     delete texture_manager;
@@ -27,6 +29,7 @@ StageManager::~StageManager() {
     delete stage_number;
 }
 
+/* inicjalizacja w petli main */
 void StageManager::init(float *deltaTime, TextureManager *tm, int *stage_number) {
     this->dt = deltaTime;
     this->texture_manager = tm;

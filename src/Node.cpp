@@ -60,6 +60,7 @@ void Node::init(int pos, TextureManager *tm) {
     _nodeBody.setPosition(_x, _y);
 }
 
+/* rysowanie wierzcholka na ekranie */
 void Node::draw(sf::RenderWindow &app) {
     app.draw(_nodeBody);
     app.draw(_text);
@@ -69,6 +70,7 @@ void Node::init_text(std::string text) {
     _text.setFont(*texture_manager->get_font());
     _text.setString(text);
 
+    /// rozmiar, kolor, pozycja tekstu
     _text.setCharacterSize(N_TEXT_FONT_SIZE);
     _text.setFillColor(sf::Color::White);
     _text.setPosition(_nodeBody.getPosition() + sf::Vector2f(N_RADIUS / 2, N_RADIUS / 3));
@@ -113,6 +115,7 @@ bool Node::is_ending() {
     return ending;
 }
 
+/* zwracam informacje czy obecnie wierzcholek jest sprawdzany (zaciemniony) */
 bool Node::is_focused() {
     return focused;
 }

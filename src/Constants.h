@@ -7,6 +7,13 @@
 
 #include <SFML/Graphics.hpp>
 
+/* STAŁE DLA PROGRAMU
+* - powtarzają się często w kodzie
+* - na ich podstawie określan np. pozycje jakiegoś elementu
+* - oszczędność pisania
+* - ochrona przed błędami (ręczne wpisywanie liczb to łatwa droga do pomyłki)
+*/
+
 // szybkosc symulacji
 const float SIM_SPEED = 0.5;
 
